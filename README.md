@@ -3,13 +3,13 @@
 <br />
 <div align="center">
   <a href="https://github.com/ushnaijaz/Field-Finder-App.git">
-    <img src="https://github.com/ushnaijaz/Field-Finder-App/blob/master/field-finder/static/images/logo.jpg" alt="Logo" width="100" height="100">
+    <img src="https://github.com/Zainab-Rizwan/Field-Finder-App/blob/master/field-finder/static/images/logo.jpg" alt="Logo" width="100" height="100">
   </a>
  </div>
  
- ## Table Of Content
+ ## Table Of Contents
 
-- [Table Of Content](#table-of-content)
+- [Table Of Contents](#table-of-content)
 - [Project Description](#project-description)
 - [Built With](#built-with)
 - [Contributers](#contributers)
