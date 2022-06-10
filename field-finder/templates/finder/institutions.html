@@ -1,0 +1,190 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
+<title>Institutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="shortcut icon" type="image/png" href="{% static '/images/logo.jpg' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static '/css/style1.css' %}">
+</head>
+
+<body>
+
+
+<!------------------------------------navbar start--------------------------->
+<div class="container">
+    <nav>
+      <div class="nav-links">
+          <ul>
+          <li><a href="{% url 'finder-home' %}">HOME</a></li>
+          <li><a href="{% url 'finder-majors' %}">MAJORS</a></li>
+          <li><a class="active" href="{% url 'finder-institutions' %}">INSTITUTIONS<span class="sr-only">(current)</span></a></li>
+          <li><a href="{% url 'finder-merit' %}">MERIT CALCULATOR</a></li>
+         
+          {% if user.is_authenticated %}
+             <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+          {% else %}
+             <li><a href="{% url 'register' %}">REGISTER</a></li>
+             <li><a href="{% url 'login' %}">LOGIN</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+</div>
+<!------------------------------------navbar end--------------------------->
+
+<!------------------------------------overview start--------------------------->
+<section id="overview">
+  <div class="container">
+    <div class="row">
+
+      <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.6s">
+         <h2> Institutions</h2><br>
+        <p>Choosing a good institution is an important decision. There are so many things you have to consider, one of which is the location. If you've ever wanted to know which educational institutions are present in your city or areas near you, you can find out here!</p>
+        <p>We have compiled a wide-ranging list of over 1500 instiutions of Pakistan along with their locations so you can see all of your options.</p>
+        <p><h4>Words of wisdom:</h4> The college or university you go to can have a great impact on the rest of your life, so do all your research and choose wisely!</p>
+      </div>
+          
+      <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.9s">
+        <img src="{% static '/images/image.jpg' %}" class="img-responsive" alt="Overview">
+      </div>
+
+    </div>
+  </div>
+</section>
+<!------------------------------------overview end--------------------------->
+
+
+<!--------------------------------------------table start------------------------------------ -->
+<section id="drops">
+  <div class="container">
+    <div class="row">
+      
+      <div class="wow bounceIn col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10 text-center">
+        <div class="section-title">
+          <h2>Explore Institutions</h2>
+          <p>Refine your search by entering your city and province in the search filter below for more specific results.</p><br>
+        </div>
+      </div>
+
+        <!----Search Filter Start----->
+        <div class="searchfilter">
+          <div class="col-sm-6">            
+                    <label for="inputState">PROVINCE</label>
+                    <select  id="select1" style="" >
+                              <option value="0"></option>
+                              <option value="1">Azad Kashmir</option>
+                              <option value="2">Balochistan</option>
+                              <option value="3">Gilgit-Baltistan</option>
+                              <option value="4">Khyber Pakhtunkhwa</option>
+                              <option value="5">Punjab</option>
+                              <option value="6">Sindh</option>
+                    </select>
+
+               <label for="inputState" style=" margin: 10px;">CITY</label>
+                      <select  id="select2"  style="">
+                       <option value="0"></option>
+                              <option value="1"></option>
+                              <option value="2">Quetta</option>
+                              <option value="3">Gilgit-Baltistan</option>
+                              <option value="4">Khyber Pakhtunkhwa</option>
+                              <option value="5">Punjab</option>
+                              <option value="6">Sindh</option>
+                      </select>
+                      
+          </div><hr style="width: 100%">
+
+
+          <!----Search Filter End----->
+          <table class="table">
+            <thead style="color:#FFCB78; font-size: 17px;">
+              <tr>
+                <th scope="col" style="width: 50px; ">#</th>
+                <th scope="col" style="width: 480px; ">INSTITUTION</th>
+                <th scope="col" style="width: 170px;" >CITY</th>
+                <th scope="col" style="width: 230px;">PROVINCE</th>
+              </tr>
+            </thead>
+
+            <tbody style="line-height: 25px; font-size: 15px;">
+                {% for user in obj2 %}
+                <tr>
+                    <td scope="col" style="width: 50px; ">{{ user.id }}</td>
+                    <td scope="col" style="width: 480px; ">{{ user.institution }}</td>
+                    <td scope="col" style="width: 170px;">{{ user.city }}</td>
+                    <td scope="col" style="width: 230px;">{{ user.province }}</td>
+
+                </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+  </div>
+</section>
+<!--------------------------------------------table end------------------------------------ -->
+
+
+
+
+
+
+<!--------------------------------------------footer start------------------------------------ -->
+<footer>
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-12 col-sm-12">
+        <p>Copyright © 2021. Field Finder.</p>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+<!--------------------------------------------footer end------------------------------------ -->
+
+
+
+<script src="{% static '/js/jquery.js' %}"></script>
+<script src="{% static '/js/bootstrap.min.js' %}"></script>
+<Script>
+var $select1 = $( '#select1' ),
+$select2 = $( '#select2' ),
+$options = $select2.find( 'option' ); 
+
+$("#select1").on("change",function(){
+               var a = $(this).find("option:selected").html();
+               
+
+               $("table tr td:last-child").each(
+                   function(){
+                       
+                       if($(this).html() != a){
+                           $(this).parent().hide();
+                       }
+
+                       else{
+                           $(this).parent().show();
+                       }
+                   });
+           }); 
+
+$("#select2").on("change",function(){
+               var a = $(this).find("option:selected").html();
+               $("table tr td:nth-last-child(2)").each(
+                   function(){
+                      
+
+                       if($(this).html() != a){
+                           $(this).parent().hide();
+                       }
+                       else{
+                           $(this).parent().show();
+                       }
+                   });
+           }); 
+
+    </Script>
+</body>
+</html>

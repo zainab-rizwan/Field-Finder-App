@@ -1,0 +1,76 @@
+ {% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Register</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="shortcut icon" type="image/png" href="{% static '/images/logo.jpg' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static '/css/style1.css' %}">
+</head>
+<body>
+
+<!------------------------------------navbar start--------------------------->
+<div class="container">
+    <nav>
+      <div class="nav-links">
+          <ul>
+          <li><a href="{% url 'finder-home' %}">HOME</a></li>
+          <li><a href="{% url 'finder-majors' %}">MAJORS</a></li>
+          <li><a href="{% url 'finder-institutions' %}">INSTITUTIONS</a></li>
+          <li><a href="{% url 'finder-merit' %}">MERIT CALCULATOR</a></li>
+         
+          {% if user.is_authenticated %}
+             <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+          {% else %}
+             <li><a  class="active" href="{% url 'register' %}">REGISTER<span class="sr-only">(current)</span></a></li>
+             <li><a href="{% url 'login' %}">LOGIN</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+</div>
+<!------------------------------------navbar end--------------------------->
+
+
+<div class="content-section">
+        <form method="POST" >
+            {% csrf_token %}
+            <fieldset class="form-group" >
+                <legend style="padding-top: 20px;" class="border-bottom mb-4">Join Us</legend>
+                {{ form|crispy}}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Sign Up</button>
+            </div>
+        
+        <div class="border-top">
+            <small class="text-muted">
+                Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+            </small>
+        </div>
+    </form>
+    <br><br>
+</div>
+
+
+<!--------------------------------------------footer start------------------------------------ -->
+<footer>
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-12 col-sm-12">
+        <p>Copyright © 2021. Field Finder.</p>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+<!--------------------------------------------footer end------------------------------------ -->
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Logout</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="shortcut icon" type="image/png" href="{% static '/images/logo.jpg' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static '/css/style1.css' %}">
+    
+</head>
+<body>
+
+<!------------------------------------navbar start--------------------------->
+<div class="container">
+    <nav>
+      <div class="nav-links">
+          <ul>
+          <li><a href="{% url 'finder-home' %}">HOME</a></li>
+          <li><a href="{% url 'finder-majors' %}">MAJORS</a></li>
+          <li><a href="{% url 'finder-institutions' %}">INSTITUTIONS</a></li>
+          <li><a  href="{% url 'finder-merit' %}">MERIT CALCULATOR</a></li>
+         
+          {% if user.is_authenticated %}
+             <li><a class="active" href="{% url 'logout' %}">LOGOUT<span class="sr-only">(current)</span></a></li>
+          {% else %}
+             <li><a href="{% url 'register' %}">REGISTER</a></li>
+             <li><a href="{% url 'login' %}">LOGIN</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+</div>
+<!------------------------------------navbar end--------------------------->
+    <form>
+        <h2>You have been logged out</h2>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                <a class="ml-2" href="{% url 'login' %}">Sign In</a><br>
+                <a class="ml-2" href="{% url 'finder-home' %}">Back to Home</a>
+
+            </small>
+        </div>
+    </form>
+
+</body>
+</html>

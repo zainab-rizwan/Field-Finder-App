@@ -1,0 +1,410 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
+<title>Majors</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="shortcut icon" type="image/png" href="{% static '/images/logo.jpg' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static '/css/style1.css' %}">
+</head>
+
+
+<body>
+
+
+<!------------------------------------navbar start--------------------------->
+<div class="container">
+    <nav>
+      <div class="nav-links">
+          <ul>
+          <li><a href="{% url 'finder-home' %}">HOME</a></li>
+          <li><a class="active" href="{% url 'finder-majors' %}">MAJORS<span class="sr-only">(current)</span></a></li>
+          <li><a href="{% url 'finder-institutions' %}">INSTITUTIONS</a></li>
+          <li><a href="{% url 'finder-merit' %}">MERIT CALCULATOR</a></li>
+         
+          {% if user.is_authenticated %}
+             <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+          {% else %}
+             <li><a href="{% url 'register' %}">REGISTER</a></li>
+             <li><a href="{% url 'login' %}">LOGIN</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+</div>
+<!------------------------------------navbar end--------------------------->
+
+
+<!------------------------------------overview start--------------------------->
+<section id="overview">
+  <div class="container">
+    <div class="row">
+
+      <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.6s">
+        <h2> Majors</h2><br>
+        <p>Have you ever felt unsure thinking about what you're going to major in? Maybe you knew the category but wasn't sure about the majors it offered. Or maybe you knew the major but wanted to know if there were similar majors in that category.</p>
+        <p>Well you're in luck! Here we have compiled an extensive list of degree courses offered all over Pakistan, so you can see all of your options!</p>
+        <p><h4>Words of wisdom:</h4> Don't pick a major based on what is easy to you or what your parents say, because that way you'll be cheating yourself out of some great opportunities and self-discovery!</p>
+      </div>
+          
+      <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.9s"> 
+        <img src="{% static '/images/image.jpg' %}" class="img-responsive" alt="Overview">
+      </div>
+
+    </div>
+  </div>
+</section>
+<!------------------------------------overview end--------------------------->
+
+
+
+<!--------------------------------------------dropdowns start------------------------------------ -->
+<section id="drops" class="parallax-section">
+  <div class="container">
+    <div class="row">
+      <div class="wow bounceIn col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10 text-center">
+        <div class="section-title">
+          <h2>Explore Majors</h2>
+          <p>Click on a button category of your choice and explore related programs under it.</p><br>
+        </div>
+      </div>
+
+
+      <div class="wow fadeInUp col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10" data-wow-delay="0.9s">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading1">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                         Agricultural Sciences
+                    </a>
+                  </h4>
+              </div>
+              <div id="collapse1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading1">
+                  <div class="panel-body">
+                    <h4>COURSES OFFERED</h4><hr>
+                     {% for user in obj1 %}
+                         <ul>
+                           {{ user.Agricultural }}
+                         </ul>
+                         {% endfor %} 
+                  </div>
+               </div>
+          </div>
+
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading2">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                        Art & Design
+                    </a>
+                  </h4>
+              </div>
+              <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2">
+                  <div class="panel-body">
+                  <h4>COURSES OFFERED</h4><hr>
+                   {% for user in obj1 %}
+                       <ul>
+                         {{ user.Art }}
+                       </ul>
+                       {% endfor %} 
+                  </div>
+               </div>
+          </div>
+
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading3">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                        Biological & Life Sciences
+                    </a>
+                  </h4>
+              </div>
+              <div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading3">
+                  <div class="panel-body">
+                     <h4>COURSES OFFERED</h4><hr>
+                     {% for user in obj1 %}
+                         <ul>
+                           {{ user.Biological }}
+                         </ul>
+                         {% endfor %}
+                  </div>
+               </div>
+          </div>
+          
+          <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading4">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                        Chemical & material sciences
+                    </a>
+                  </h4>
+              </div>
+              <div id="collapse4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading4">
+                  <div class="panel-body">
+                      <h4>COURSES OFFERED</h4><hr>
+                     {% for user in obj1 %}
+                         <ul>
+                           {{ user.Chemical }}
+                         </ul>
+                         {% endfor %}
+                  </div>
+               </div>
+           </div>
+
+           <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading5">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                        Commerce / Finance & Accounting
+                    </a>
+                  </h4>
+              </div>
+              <div id="collapse5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading5">
+                  <div class="panel-body">
+                     <h4>COURSES OFFERED</h4><hr>
+                     {% for user in obj1 %}
+                         <ul>
+                           {{ user.Commerce }}
+                         </ul>
+                         {% endfor %}
+                  </div>
+               </div>
+           </div>
+
+           <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading6">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                        Computer Sciences & Information Technology
+                    </a>
+                  </h4>
+              </div>
+              <div id="collapse6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading6">
+                  <div class="panel-body">
+                      <h4>COURSES OFFERED</h4><hr>
+                     {% for user in obj1 %}
+                         <ul>
+                           {{ user.Computer }}
+                         </ul>
+                         {% endfor %}
+                  </div>
+               </div>
+           </div>
+
+           <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading7">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                        Earth & Environmental Sciences
+                    </a>
+                  </h4>
+              </div>
+              <div id="collapse7" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading7">
+                  <div class="panel-body">
+                      <h4>COURSES OFFERED</h4><hr>
+                     {% for user in obj1 %}
+                         <ul>
+                           {{ user.Earth }}
+                         </ul>
+                         {% endfor %}
+                  </div>
+               </div>
+           </div>
+
+           <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading8">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse8" aria-expanded="false" aria-controls="collapse8">
+                        Engineering
+                    </a>
+                  </h4>
+              </div>
+              <div id="collapse8" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading8">
+                  <div class="panel-body">
+                     <h4>COURSES OFFERED</h4><hr>
+                     {% for user in obj1 %}
+                         <ul>
+                           {{ user.Engineering }}
+                         </ul>
+                         {% endfor %}
+                  </div>
+               </div>
+           </div>
+
+           <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading9">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse9" aria-expanded="false" aria-controls="collapse9">
+                        Management Sciences
+                    </a>
+                  </h4>
+              </div>
+              <div id="collapse9" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading9">
+                  <div class="panel-body">
+                   <h4>COURSES OFFERED</h4><hr>
+                     {% for user in obj1 %}
+                         <ul>
+                           {{ user.Management }}
+                         </ul>
+                         {% endfor %}
+                  </div>
+               </div>
+           </div>
+
+           <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading10">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse10" aria-expanded="false" aria-controls="collapse10">
+                        Media Studies
+                    </a>
+                  </h4>
+              </div>
+              <div id="collapse10" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading10">
+                  <div class="panel-body">
+                     <h4>COURSES OFFERED</h4><hr>
+                     {% for user in obj1 %}
+                         <ul>
+                           {{ user.Media }}
+                         </ul>
+                         {% endfor %}
+                  </div>
+               </div>
+           </div>
+
+           <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading11">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse11" aria-expanded="false" aria-controls="collapse11">
+                        Medical Sciences
+                    </a>
+                  </h4>
+              </div>
+              <div id="collapse11" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading11">
+                  <div class="panel-body">
+                      <h4>COURSES OFFERED</h4><hr>
+                     {% for user in obj1 %}
+                         <ul>
+                           {{ user.Management }}
+                         </ul>
+                         {% endfor %}
+                  </div>
+               </div>
+           </div>
+
+           <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading12">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse12" aria-expanded="false" aria-controls="collapse12">
+                        Physics & Numerical Sciences
+                    </a>
+                  </h4>
+              </div>
+              <div id="collapse12" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading12">
+                  <div class="panel-body">
+                      <h4>COURSES OFFERED</h4><hr>
+                     {% for user in obj1 %}
+                         <ul>
+                           {{ user.Physics }}
+                         </ul>
+                         {% endfor %}
+                  </div>
+               </div>
+           </div>
+
+           <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading13">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse13" aria-expanded="false" aria-controls="collapse13">
+                        Religious Studies
+                    </a>
+                  </h4>
+              </div>
+              <div id="collapse13" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading13">
+                  <div class="panel-body">
+                      <h4>COURSES OFFERED</h4><hr>
+                     {% for user in obj1 %}
+                         <ul>
+                           {{ user.Religious }}
+                         </ul>
+                         {% endfor %}
+                  </div>
+               </div>
+           </div>
+
+           <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading14">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse14" aria-expanded="false" aria-controls="collapse14">
+                        Social Sciences
+                    </a>
+                  </h4>
+              </div>
+              <div id="collapse14" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading14">
+                  <div class="panel-body">
+                     <h4>COURSES OFFERED</h4><hr>
+                     {% for user in obj1 %}
+                         <ul>
+                           {{ user.Social }}
+                         </ul>
+                         {% endfor %}
+                  </div>
+               </div>
+           </div>
+
+           <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading15">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse15" aria-expanded="false" aria-controls="collapse15">
+                        Technical
+                    </a>
+                  </h4>
+              </div>
+              <div id="collapse15" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading15">
+                  <div class="panel-body">
+                      <h4>COURSES OFFERED</h4><hr>
+                     {% for user in obj1 %}
+                         <ul>
+                           {{ user.Technical }}
+                         </ul>
+                         {% endfor %}
+                  </div>
+               </div>
+           </div>
+
+         </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!--------------------------------------------dropdowns end------------------------------------ -->
+
+
+
+
+
+
+<!--------------------------------------------footer start------------------------------------ -->
+<footer>
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-12 col-sm-12">
+        <p>Copyright © 2021. Field Finder.</p>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+<!--------------------------------------------footer end------------------------------------ -->
+
+
+
+<script src="{% static '/js/jquery.js' %}"></script>
+<script src="{% static '/js/bootstrap.min.js' %}"></script>
+</body>
+</html>

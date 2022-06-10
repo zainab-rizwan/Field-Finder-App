@@ -1,0 +1,426 @@
+
+{% load static %}
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
+<title>Merit Calculator</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="shortcut icon" type="image/png" href="{% static '/images/logo.jpg' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static '/css/style1.css' %}">
+</head>
+
+
+<body>
+
+
+<!------------------------------------navbar start--------------------------->
+<div class="container">
+    <nav>
+      <div class="nav-links">
+          <ul>
+          <li><a href="{% url 'finder-home' %}">HOME</a></li>
+          <li><a href="{% url 'finder-majors' %}">MAJORS</a></li>
+          <li><a href="{% url 'finder-institutions' %}">INSTITUTIONS</a></li>
+          <li><a class="active" href="{% url 'finder-merit' %}">MERIT CALCULATOR<span class="sr-only">(current)</span></a></li>
+         
+          {% if user.is_authenticated %}
+             <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+          {% else %}
+             <li><a href="{% url 'register' %}">REGISTER</a></li>
+             <li><a href="{% url 'login' %}">LOGIN</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+</div>
+<!------------------------------------navbar end--------------------------->
+
+
+<!------------------------------------overview start--------------------------->
+<section id="overview">
+  <div class="container">
+    <div class="row">
+
+      <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.6s">
+        <h2> Merit Calculators</h2><br>
+        <p>Say you have a particular educational institution in mind, one you really want to be a part of. Now to actually get in, you're going to have to make sure you meet the requirements and your aggregate is enough.</p>
+        <p>For that reason, here you can find the merit calculators of the leading universities of Pakistan. Using these, you can now calculate your aggregate!</p>
+        <p><h4>Words of wisdom:</h4>If your expected aggregate is falling short, calculate how many more marks you need make it a goal!</p>
+      </div>
+          
+      <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.9s"> 
+        <img src="{% static '/images/image.jpg' %}" class="img-responsive" alt="Overview">
+      </div>
+
+    </div>
+  </div>
+</section>
+<!------------------------------------overview end--------------------------->
+
+
+
+<!--------------------------------------------dropdowns start------------------------------------ -->
+<section id="drops">
+  <div class="container">
+    <div class="row">
+      <div class="wow bounceIn col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10 text-center">
+        <div class="section-title">
+          <h2>Calculate Your Aggregate</h2>
+          <p>Pick the merit calculator you need and fill in the requirements.</p><br>
+        </div>
+      </div>
+
+
+      <div class="wow fadeInUp col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10" data-wow-delay="0.9s">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading1">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                        U.E.T Engineering Merit Calculator
+                    </a>
+                  </h4>
+              </div>
+              <div id="collapse1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading1">
+                  <div class="panel-body">
+                  	<form>
+                   <center>
+                    <h3>U.E.T Engineering Merit Calculator</h3><hr>
+                    <label for="matric">Marks in Matric/ Equivalent</label>
+                    <input id="m_o" name="m_o" type="number"  class="form-control" placeholder="Obtained Marks" required/>
+                    <input id="m_t" name="m_t" type="number"  class="form-control" placeholder="Total Marks" required/>
+                    <label for="1st year (Out of 505)">Marks in Intermediate/ Equivalent</label>
+                    <input id="i_o" name="i_o" type="number" class="form-control" placeholder="Obtained Marks" required/>
+                    <input id="i_t" name="i_t" type="number" class="form-control" placeholder="Total Marks" required/>
+                    <label for="Entrance">Expected Entrance Test Marks (out of 400)</label>
+                    <input id="e_o" name="e_o" type="number" class="form-control" placeholder="Expected Marks"required>
+                    <br>
+                    <input style="width: 190px;" onclick="javascript: return myFunction1();" type="submit" value="CALCULATE" class="button expand alert">
+                    <br>
+		             <label style="margin-right: 10px; "><strong>Your Aggregate for UET </strong></label>
+		             <input id="agg" name="agg" type="text" value="" />
+                  </center>
+              </form>
+                  </div>
+               </div>
+          </div>
+
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading2">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                        Medical Merit Calculator
+                    </a>
+                  </h4>
+              </div>
+              <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2">
+                  <div class="panel-body">
+                  	<form>
+                   <center>
+                   <h3>Medical Merit Calculator</h3><hr>
+                      <label for="1st year (Out of 505)">Marks in Matric/ Equivalent</label>
+                        <input type="number" id="m_1" name="m_1" class="form-control" placeholder="Obtained Marks" required>
+                        <input type="number" id="m_2" name="m_2" class="form-control" placeholder="Total Marks" required>
+                        <label for="matric">Marks in Intermediate/ Equivalent</label>
+                        <input type="number" id="i_1" name="i_1" class="form-control" placeholder="Obtained Marks" required>
+                        <input type="number" id="i_2" name="i_2" class="form-control" placeholder="Total Marks" required>
+                        <label for="Entrance">Expected Entrance Test Percentage [MDCAT]</label>
+                        <input type="number" id="e_1" name="e_1" class="form-control" placeholder="Expected Percentage (from 0 to 100)"required>
+                        <br>
+                        <input type="submit"  onclick="javascript: return myFunction2();" class="button expand alert" value="CALCULATE">
+                        <br>
+                        <label  style="margin-right: 10px; "><strong>Your Aggregate:</strong></label>
+                        <input id="agg1" name="agg1" type="text" value="" />  
+                </center>
+            </form>
+                  </div>
+               </div>
+          </div>
+
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading3">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                        NUST Merit Calculator
+                    </a>
+                  </h4>
+              </div>
+              <div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading3">
+                  <div class="panel-body">
+                  	<form>
+                  	 <center>
+                   <h3>NUST Merit Calculator</h3><hr>
+       
+              <label for="1st year (Out of 505)">Marks in Matric</label>
+              <input type="number" id="m_3" name="m_3" class="form-control" placeholder="Obtained Marks" required>
+              <input type="number" id="m_4" name="m_4" class="form-control" placeholder="Total Marks" required>
+              <label for="1st year (Out of 505)">Marks in Intermediate/ Equivalent</label>
+              <input type="number" id="i_3" name="i_3" class="form-control" placeholder="Obtained Marks" required>
+              <input type="number" id="i_4" name="i_4" class="form-control" placeholder="Total Marks" required>
+              <label for="Entrance">NET Marks</label>
+              <input type="number" id="e_2" name="e_2" class="form-control" placeholder="Expected Marks  (out of 200)"required>
+              <br>
+              <input type="submit"  onclick="javascript: return myFunction3();" class="button expand alert" value="CALCULATE">
+               <br>
+              <label  style="margin-right: 10px; "><strong>Your Aggregate for NUST</strong></label>
+              <input id="agg2" name="agg2" type="text" value="" /> 
+              </form>
+                  </div>
+               </div>
+          </div>
+          
+          <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading4">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                       COMSATS Merit Calculator
+                    </a>
+                  </h4>
+              </div>
+              <div id="collapse4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading4">
+                  <div class="panel-body">
+                  	<form>
+                  		 <center>
+                       <h3>COMSATS Merit Calculator</h3><hr>
+             
+             <label for="1st year (Out of 505)">Marks in Matric/ Equivalent</label>
+              <input type="number"  id="m_5" name="m_5" class="form-control" placeholder="Obtained Marks" required>
+              <input type="number"  id="m_6" name="m_6" class="form-control" placeholder="Total Marks" required>
+              <label for="1st year (Out of 505)"> Marks Intermediate/ Equivalent</label>
+              <input type="number"  id="i_5" name="i_5" class="form-control" placeholder="Obtained Marks" required>
+              <input type="number"  id="i_6" name="i_6" class="form-control" placeholder="Total Marks" required>
+              <label for="Entrance">NTS Marks</label>
+              <input type="number"  id="e_3" name="e_3" class="form-control" placeholder="NTS Marks (out of 100)"required>
+              <br>
+              <input type="submit"  onclick="javascript: return myFunction4();" class="button expand alert" value="CALCULATE">
+              <br>
+              <label  style="margin-right: 10px; "><strong>Your Aggregate for COMSATS</strong></label>
+          <input id="agg3" name="agg3" type="text" value="" />   
+        </center>
+    </form>
+                  </div>
+               </div>
+           </div>
+
+           <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading5">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                        PIEAS Merit Calculator
+                    </a>
+                  </h4>
+              </div>
+              <div id="collapse5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading5">
+                  <div class="panel-body">
+                  	<form>
+                    <center>
+                    	<h3>PIEAS Merit Calculator</h3><hr>
+               <label for="1st year (Out of 505)">Marks in Matric/ Equivalent</label>
+              <input type="number"  id="m_7" name="m_7" class="form-control" placeholder="Obtained Marks" required>
+              <input type="number"  id="m_8" name="m_8" class="form-control" placeholder="Total Marks" required>
+              <label for="1st year (Out of 505)"> Marks Intermediate/ Equivalent</label>
+              <input type="number"  id="i_7" name="i_7" class="form-control" placeholder="Obtained Marks" required>
+              <input type="number"  id="i_8" name="i_8" class="form-control" placeholder="Total Marks" required>
+              <label for="Entrance">PIEAS Admission Test Marks</label>
+              <input type="number"  id="e_4" name="e_4" class="form-control" placeholder="Admission Test Marks (out of 100)"required>
+              <br>
+              <input type="submit"  onclick="javascript: return myFunction5();" class="button expand alert" value="CALCULATE">
+              <br>
+          <label  style="margin-right: 10px; "><strong>Your Aggregate for PIEAS</strong></label>
+          <input id="agg4" name="agg4" type="text" value="" />   
+          </center>
+      </form>
+                  </div>
+               </div>
+           </div>
+
+           <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading6">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                        GIKI Merit Calculator
+                    </a>
+                  </h4>
+              </div>
+              <div id="collapse6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading6">
+                  <div class="panel-body">
+                  	<form>
+                  	 <center>
+                     <h3>GIKI Merit Calculator</h3><hr>
+       
+              <label for="1st year (Out of 505)">Marks in Matric/ Equivalent</label>
+              <input type="number"  id="m_g" name="m_g" class="form-control" placeholder="Obtained Marks" required>
+              <input type="number"  id="m_k" name="m_k" class="form-control" placeholder="Total Marks" required>
+              <label for="1st year (Out of 505)"> Marks Intermediate/ Equivalent</label>
+              <input type="number"  id="i_g" name="i_g" class="form-control" placeholder="Obtained Marks" required>
+              <input type="number"  id="i_k" name="i_k" class="form-control" placeholder="Total Marks" required>
+              <label for="Entrance">GIKI Admission Test Marks</label>
+              <input type="number"  id="e_5" name="e_5" class="form-control" placeholder="Admission Test Marks (out of 200)"required>
+              <br>
+              <input type="submit"  onclick="javascript: return myFunction6();" class="button expand alert" value="CALCULATE">
+              <br>
+          <label  style="margin-right: 10px; "><strong>Your Aggregate for GIKI</strong></label>
+          <input id="agg5" name="agg5" type="text" value="" />   
+          </center>
+      </form>
+                  </div>
+               </div>
+           </div>
+
+           <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading7">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                       General Merit Calculator
+                    </a>
+                  </h4>
+              </div>
+              <div id="collapse7" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading7">
+                  <div class="panel-body">
+                  	<form>
+                  	        <center>
+                      <h3>General Merit Calculator</h3><hr>
+               <label for="1st year (Out of 505)"> Marks Intermediate/ Equivalent or enter Matric/O level Marks<br> if Intermediate/A level not available</label>
+              <input type="number"  id="i_f" name="i_f" class="form-control" placeholder="Obtained Marks in FSC Part 1" required>
+              <input type="number"  id="i_s" name="i_s" class="form-control" placeholder="Total Marks" required>
+              <label for="Entrance">FAST NU Admission Test Marks</label>
+              <input type="number"  id="e_6" name="e_6" class="form-control" placeholder="NU Test Marks (out of 100)"required>
+              <br>
+              <input type="submit"  onclick="javascript: return myFunction7();" class="button expand alert" value="CALCULATE">
+              <br>
+          <label  style="margin-right: 10px; "><strong>Your Aggregate</strong></label>
+          <input id="agg6" name="agg6" type="text" value="" />   
+          </center>
+      </form>
+                  </div>
+               </div>
+           </div>
+
+        
+         </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!--------------------------------------------dropdowns end------------------------------------ -->
+
+
+
+
+
+
+<!--------------------------------------------footer start------------------------------------ -->
+<footer>
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-12 col-sm-12">
+        <p>Copyright © 2021. Field Finder.</p>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+<!--------------------------------------------footer end------------------------------------ -->
+
+
+
+<script src="{% static '/js/jquery.js' %}"></script>
+<script src="{% static '/js/bootstrap.min.js' %}"></script>
+<script>
+//Uet merit
+var m_o, m_t, i_o, i_t, e_o, agg; 
+function myFunction1() 
+{  
+ m_o=document.getElementById("m_o").value;
+ m_t=document.getElementById("m_t").value;
+ i_o=document.getElementById("i_o").value;
+ i_t=document.getElementById("i_t").value;
+ e_o=document.getElementById("e_o").value; 
+ agg=((45*i_o)/i_t)+((30*e_o)/400)+((25*m_o)/m_t); 
+ document.getElementById("agg").value = agg; return false;
+ }  
+
+ //Medical merit
+var m_1, m_2, i_1, i_2, e_1, agg1; 
+function myFunction2() 
+{  
+ m_1=document.getElementById("m_1").value;
+ m_2=document.getElementById("m_2").value;
+ i_1=document.getElementById("i_1").value;
+ i_2=document.getElementById("i_2").value;
+ e_1=document.getElementById("e_1").value; 
+ agg1=((40*i_1)/i_2)+((50*e_1)/200)+((10*m_1)/m_2); 
+ document.getElementById("agg1").value = agg1; return false;
+ }  
+
+ //Nust merit
+var m_3, m_4, i_o, i_t, e_2, agg2; 
+function myFunction3() 
+{  
+ m_3=document.getElementById("m_3").value;
+ m_4=document.getElementById("m_4").value;
+ i_3=document.getElementById("i_3").value;
+ i_4=document.getElementById("i_4").value;
+ e_2=document.getElementById("e_2").value; 
+ agg2=((15*i_3)/i_4)+((75*e_2)/200)+((10*m_3)/m_4); 
+ document.getElementById("agg2").value = agg2; return false;
+ }  
+
+//COMSATS merit
+var m_5, m_6, i_5, i_6, e_3, agg3; 
+function myFunction4() 
+{  
+ m_5=document.getElementById("m_5").value;
+ m_6=document.getElementById("m_6").value;
+ i_5=document.getElementById("i_5").value;
+ i_6=document.getElementById("i_6").value;
+ e_3=document.getElementById("e_3").value; 
+ agg3=((40*i_5)/i_6)+((50*e_3)/100)+((10*m_5)/m_6); 
+ document.getElementById("agg3").value = agg3; return false;
+ }  
+   
+
+//PIEAS merit
+var m_7, m_8, i_7, i_8, e_4, agg4; 
+function myFunction5() 
+{  
+ m_7=document.getElementById("m_7").value;
+ m_8=document.getElementById("m_8").value;
+ i_7=document.getElementById("i_7").value;
+ i_8=document.getElementById("i_8").value;
+ e_4=document.getElementById("e_4").value; 
+ agg4=((25*i_7)/i_8)+((60*e_4)/100)+((15*m_7)/m_8); 
+ document.getElementById("agg4").value = agg4; return false;
+ }  
+//GIKI merit
+var m_g, m_k, i_g, i_k, e_5, agg5; 
+function myFunction6() 
+{  
+ m_g=document.getElementById("m_g").value;
+ m_k=document.getElementById("m_k").value;
+ i_g=document.getElementById("i_g").value;
+ i_k=document.getElementById("i_k").value;
+ e_5=document.getElementById("e_5").value; 
+ agg5=((10*i_g)/i_k)+((85*e_5)/200)+((10*m_g)/m_k); 
+ document.getElementById("agg5").value = agg5; return false;
+ } 
+//FAST merit
+var i_f, i_s, e_6, agg6; 
+function myFunction7() 
+{  
+
+ i_f=document.getElementById("i_f").value;
+ i_s=document.getElementById("i_s").value;
+ e_6=document.getElementById("e_6").value; 
+ agg6=((50*i_f)/i_s)+((50*e_6)/100); 
+ document.getElementById("agg6").value = agg6; return false;
+ }  
+
+</script>
+</body>
+</html>

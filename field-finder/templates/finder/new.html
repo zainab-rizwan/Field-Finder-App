@@ -1,0 +1,762 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Field Finder</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="shortcut icon" type="image/png" href="{% static '/images/logo.jpg' %}"/>
+<title>Merit Calculator</title>
+</head>
+
+<style type="text/css">
+  body 
+  {
+  margin: 0;
+  padding: 0;
+  font-family: 'Nunito', sans-serif !important;
+  }
+
+
+  h2, h1, h4
+  {
+  font-family:'Nunito', sans-serif !important;
+  }
+
+
+  nav{
+  border-bottom: 1px solid #CDCCCA;
+  display: flex;
+  padding: 1%;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding-bottom: 0px;
+  }
+
+  nav img{
+  width: 70px;
+  margin-top:-10px; 
+  margin-bottom :-9px; 
+  position: relative;
+  right: 660px;
+
+
+  }
+  .nav-links {
+  flex: 1;  
+  text-align: right;
+
+  }
+  .nav-links ul li {
+  list-style: none;
+  display: inline-block;
+  padding: 1px 12px;
+  position: relative;
+  }
+
+  .nav-links ul li a{
+  color: #000;
+  text-decoration: none;
+  font-size: 18px;
+
+  }
+
+  .nav-links ul li::after{
+
+  content: "";
+  width:0%;
+  height: 3px;
+  background: #FFCB78;
+  display: block;
+  margin: auto;
+  transition: 0.5s
+  }
+
+  .nav-links ul li:hover::after{
+
+  width: 100%;
+  }
+
+  .nav-links .active
+  {
+  color:#FFCB78;
+  }
+  /*navbar end*/
+
+  /* Left column */
+  .leftcolumn {   
+  padding-left: 3%;
+
+  float: left;
+  width: 70%;
+  }
+
+  /* Right column */
+  .rightcolumn {
+  padding-right: 3%;
+  float: left;
+  width: 30%;
+  padding-left: 20px;
+  }
+
+
+  .card 
+  {
+  margin-top: 50px;
+  border-radius: 4px;
+  padding: 20px;
+
+
+  }
+
+  /* Page Description start */
+  .card1
+  {
+
+  font-size: 20px;
+  color: #212529;      
+  padding: 55px;
+  border: 0px;
+  background-color: #b8b4ab;
+  overflow: hidden;
+  background-size: cover;
+  }
+  /* Page Description end */
+
+
+  /* Page Details start */
+  .card2
+
+  {
+
+  font-size: 18px;
+  border: 0px;
+  padding: 30px;
+  background-color: #FFCB78;
+  color: white;
+
+  }
+  /* Page Detals end */
+
+
+  /* button start */
+  .btn{
+  font-size: 18px !important;
+  border:2px;
+  cursor: pointer;
+  display: block; 
+  background-color:#222;
+  color:#f7f5f2;
+  border-radius: 4px;
+  height: 75px;   
+  width: 190px;
+  }
+  .btn-group-vertical button:focus {
+  background-color:#FFCB78; 
+  color:white;
+  outline: 0 !important;
+  box-shadow: none;
+  }
+  .btn-group-vertical button:hover {
+  background-color:#FFCB78; 
+  color:white;
+  }
+
+  .btn-group-vertical button:active { 
+  background-color:#FFCB78;
+  color:white;
+  }
+
+  /* buttons end */
+
+  /* Clear floats after the columns */
+  .row:after 
+  {
+  content: "";
+  display: table;
+  clear: both;
+  }
+
+
+  .rectangle1 {
+  margin-top: 19px;
+  width: 235%;
+  height: 521px;
+  border-radius: 4px;
+  border: 1px solid #CDCCCA;
+  float: right;
+  margin-right: 0.5px;
+  margin-bottom: 3px;
+  }
+
+
+
+  /* popup form */
+  .form-popup {
+  display: none;
+  width: 810px;
+  float: right; 
+  left: 457px !important;
+  border-radius: 4px;
+  position: absolute; 
+  }
+
+  .form {
+  font-size: 19px;
+  height: 520px;
+  padding-left: 20px;
+  border: 1px solid #FFCB78;
+  background-color: white;
+  color: black;
+  text-align: left;
+
+  }
+
+  .form h2
+  {
+  padding-top: 13px; 
+  padding-bottom: 5px; 
+  text-align: center;
+  }
+
+  .form label
+  {
+    margin-bottom: -2px;
+  }
+  .form hr
+  {
+  margin: 5px;
+  margin-bottom: 10px;
+  }
+
+  .form input[type=number]{
+  width: 350px;
+  height: 33px;
+  padding: 15px;
+  background: #f4f4f1;
+  margin: 10px;
+  border: 0px;
+  border-radius: 4px;
+  }
+
+  /* When the inputs get focus, do something */
+  .form input[type=number]:focus {
+  background-color: white;
+  border: 1px solid #222;
+  outline: 0 !important;
+  box-shadow: none;
+  }
+
+  /*calculate button*/
+  .form input[type=submit] {
+  font-size: 15px; 
+  margin-top: 20px; 
+  margin-bottom: 20px;
+  border:0px solid #b8b4ab;
+  cursor: pointer;
+  display: block; 
+  background-color:#222;
+  color:white;
+  border-radius: 4px;
+  height: 35px;   
+  width: 200px;
+  position: center;
+  padding: 5px;
+  }
+
+  .form input[type=submit]:focus {
+  background-color:#222; 
+  color:white;
+  outline: 0 !important;
+  box-shadow: none;
+  }
+  .form input[type=submit]:hover {
+  background-color:#FFCB78; 
+  color:white;
+  }
+
+
+
+      /* Footer start */
+  .span-or {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: -2px;
+  margin-left: -25px;
+  background-color: #fff;
+  width: 50px;
+  text-align: center;
+  }
+  .hr-or {
+  background-color: #cdcdcd;
+  height: 0.5px;
+  margin-bottom: 0px !important;
+  margin-top: 0px !important;
+  }
+  footer.nb-footer {
+  background: #222;
+  margin-top: 850px;
+  border-top: 4px solid #b78c33; }
+  footer.nb-footer .about {
+  margin: 0 auto;
+  margin-top: 40px;
+  max-width: 1170px;
+  text-align: center; }
+  footer.nb-footer .about p {
+  font-size: 13px;
+  color: #999;
+  margin-top: 30px; }
+  footer.nb-footer .about .social-media {
+  margin-top: 15px; }
+
+  footer.nb-footer .about .social-media ul li a {
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  border-radius: 50%;
+  font-size: 16px;
+  color: #b78c33;
+  border: 1px solid rgba(255, 255, 255, 0.3); }
+  footer.nb-footer .about .social-media ul li a:hover {
+  background: #b78c33;
+  color: #fff;
+  border-color: #b78c33; }
+  footer.nb-footer .footer-info-single {
+  margin-top: 30px; }
+  footer.nb-footer .footer-info-single .title {
+  color: #aaa;
+  text-transform: uppercase;
+  font-size: 16px;
+  border-left: 4px solid #b78c33;
+  padding-left: 5px; }
+  footer.nb-footer .footer-info-single ul li a {
+  display: block;
+  color: #aaa;
+  padding: 2px 0; }
+  footer.nb-footer .footer-info-single ul li a:hover {
+  color: #b78c33; }
+  footer.nb-footer .footer-info-single p {
+  font-size: 13px;
+  line-height: 20px;
+  color: #aaa; }
+  footer.nb-footer .copyright {
+  margin-top: 15px;
+  background: #B8B4AB;
+  padding: 7px 0;
+  color: black !important; }
+  footer.nb-footer .copyright p {
+
+  margin: 0;
+  padding: 0; }
+        /*----Footer end-----*/
+
+  @media screen and (max-width: 800px) {
+    .leftcolumn, .rightcolumn {   
+      width: 100%;
+      padding: 0;
+    }
+
+
+
+  }
+</style>
+
+
+<body>
+  
+<!---navbar start--->
+
+    {% load static %}
+     <nav>
+          <div class="nav-links">
+          <ul>
+          <a href="{% url 'finder-home' %}"><img src= "{% static '/images/logo.jpg' %}"></a>
+          <li><a href="{% url 'finder-home' %}">HOME</a></li>
+          <li><a href="{% url 'finder-majors' %}">MAJORS</a></li>
+          <li><a href="{% url 'finder-institutions' %}">INSTITUTIONS</a></li>
+          <li><a class="active" href="{% url 'finder-merit' %}">MERIT CALCULATOR<span class="sr-only">(current)</span></a></li>
+          
+          {% if user.is_authenticated %}
+             <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+          {% else %}
+             <li><a href="{% url 'register' %}">REGISTER</a></li>
+             <li><a href="{% url 'login' %}">LOGIN</a></li>
+          {% endif %}
+        </ul>
+        </div>
+        </nav>
+
+
+<!----navbar end--->
+
+<div class="leftcolumn">
+ <!----Page Description Start----->
+  <div class="card1 card" style="height:225px;margin-top: 20px;">
+    <div class="container row">
+      <div class="col-md-4">
+            <img src="{% static '/images/041.png' %}" class="img" width="285px" height="260px" style="margin-top:-75px; margin-left: -45px;">
+      </div>
+      <div class="col-sm-8" style="margin-top:-40px;;">
+          <h1>CALCULATE YOUR MERIT</h1><hr style="background-color: white;">
+          <p>Calculate your aggregate for admission in various leading institutions of Pakistan.</p>
+      </div>   
+    </div>
+   </div>
+ <!----Page Description End----->
+  </div>
+
+  <div class="rightcolumn">
+  <!----Page Details Start----->
+    <div class="card2 card" style="height:225px; margin-top: 20px;">
+      <h2 style="margin-top:1px;">DETAILS</h2> 
+      <p>Pick your merit calculator. Enter your marks in the fields and fill in the rest of the requirements.</p>
+    </div>
+  <!----Page Details End----->
+    <div>
+      <div class="rectangle1"></div>
+   </div>
+</div>
+
+
+<!---buttons start--->
+<div class="leftcolumn">
+
+<div class="btn-group-vertical" style=" width: 440px; margin-top: -550px;">
+
+
+<button class="btn open-button " onclick="openForm1()">U.E.T Engineering Merit Calculator</button">
+ <div class="form-popup" id="myForm1" style=" top:-2px!important; ">
+    <form action="/action_page.php" class="form" >
+      <center>
+        <h2>Lahore & Punjab Engineering Merit Calculator</h2><hr>
+              <label for="matric">Marks in Matric/ Equivalent</label>
+              <input id="m_o" name="m_o" type="number"  class="form-control" placeholder="Obtained Marks" required/>
+              <input id="m_t" name="m_t" type="number"  class="form-control" placeholder="Total Marks" required/>
+              <label for="1st year (Out of 505)">Marks in Intermediate/ Equivalent</label>
+              <input id="i_o" name="i_o" type="number" class="form-control" placeholder="Obtained Marks" required/>
+              <input id="i_t" name="i_t" type="number" class="form-control" placeholder="Total Marks" required/>
+              <label for="Entrance">Expected Entrance Test Marks (out of 400)</label>
+              <input id="e_o" name="e_o" type="number" class="form-control" placeholder="Expected Marks"required>
+              <input onclick="javascript: return myFunction1();" type="submit" value="CALCULATE" class="button expand alert">
+        <label><strong>Your Aggregate for UET [2020 Formula]</strong></label>
+        <input id="agg" name="agg" type="text" value="" />
+    </center>
+    </form>
+
+
+<button class="btn open-button" onclick="openForm2()">Medical Merit Calculator</button">
+   <div class="form-popup" id="myForm2" style=" top: -76px !important; ">
+    <form action="/action_page.php" class="form">
+        <h2>Medical Merit Calculator</h2><hr>
+        <center>
+              <label for="1st year (Out of 505)">Marks in Matric/ Equivalent</label>
+              <input type="number" id="m_1" name="m_1" class="form-control" placeholder="Obtained Marks" required>
+              <input type="number" id="m_2" name="m_2" class="form-control" placeholder="Total Marks" required>
+              <label for="matric">Marks in Intermediate/ Equivalent</label>
+              <input type="number" id="i_1" name="i_1" class="form-control" placeholder="Obtained Marks" required>
+              <input type="number" id="i_2" name="i_2" class="form-control" placeholder="Total Marks" required>
+              <label for="Entrance">Expected Entrance Test Percentage [MDCAT]</label>
+              <input type="number" id="e_1" name="e_1" class="form-control" placeholder="Expected Percentage (from 0 to 100)"required>
+              <input type="submit"  onclick="javascript: return myFunction2();" class="button expand alert" value="CALCULATE">
+              <label><strong>Your Aggregate:</strong></label>
+              <input id="agg1" name="agg1" type="text" value="" />  
+    </center>
+      </form>
+
+
+<button class="btn open-button" onclick="openForm3()">NUST Merit Calculator</button">
+      <div class="form-popup" id="myForm3" style=" top: -150px !important; ">
+    <form action="/action_page.php" class="form">
+        <h2>NUST Merit Calculator</h2><hr>
+        <center>
+              <label for="1st year (Out of 505)">Marks in Matric</label>
+              <input type="number" id="m_3" name="m_3" class="form-control" placeholder="Obtained Marks" required>
+              <input type="number" id="m_4" name="m_4" class="form-control" placeholder="Total Marks" required>
+              <label for="1st year (Out of 505)">Marks in Intermediate/ Equivalent</label>
+              <input type="number" id="i_3" name="i_3" class="form-control" placeholder="Obtained Marks" required>
+              <input type="number" id="i_4" name="i_4" class="form-control" placeholder="Total Marks" required>
+              <label for="Entrance">NET Marks</label>
+              <input type="number" id="e_2" name="e_2" class="form-control" placeholder="Expected Marks  (out of 200)"required>
+              <input type="submit"  onclick="javascript: return myFunction3();" class="button expand alert" value="CALCULATE">
+              <label><strong>Your Aggregate for NUST [2020 Formula]</strong></label>
+              <input id="agg2" name="agg2" type="text" value="" /> 
+          </center>
+      </form>
+
+
+<button class="btn open-button" onclick="openForm4()">COMSATS Merit Calculator</button">
+      <div class="form-popup" id="myForm4" style=" top: -224px !important; ">
+    <form action="/action_page.php" class="form">
+        <h2>COMSATS Merit Calculator</h2><hr>
+              <center>
+              <label for="1st year (Out of 505)">Marks in Matric/ Equivalent</label>
+              <input type="number"  id="m_5" name="m_5" class="form-control" placeholder="Obtained Marks" required>
+              <input type="number"  id="m_6" name="m_6" class="form-control" placeholder="Total Marks" required>
+              <label for="1st year (Out of 505)"> Marks Intermediate/ Equivalent</label>
+              <input type="number"  id="i_5" name="i_5" class="form-control" placeholder="Obtained Marks" required>
+              <input type="number"  id="i_6" name="i_6" class="form-control" placeholder="Obtained Marks" required>
+              <label for="Entrance">NTS Marks</label>
+              <input type="number"  id="e_3" name="e_3" class="form-control" placeholder="NTS Marks (out of 100)"required>
+              <input type="submit"  onclick="javascript: return myFunction4();" class="button expand alert" value="CALCULATE">
+              <label><strong>Your Aggregate for COMSATS [2020 Formula]</strong></label>
+          <input id="agg3" name="agg3" type="text" value="" />   
+        </center>
+      </form>
+
+
+<button class="btn open-button" onclick="openForm5()">PIEAS Merit Calculator</button">
+      <div class="form-popup" id="myForm5" style=" top: -298px !important; ">
+    <form action="/action_page.php" class="form">
+        <h2>PIEAS Merit Calculator</h2><hr>
+        <center>
+              <label for="1st year (Out of 505)">Enter Your Marks in Matric</label>
+              <input type="number" class="form-control" placeholder="Obtained Marks in Matric" required>
+              <input type="number" class="form-control" placeholder="Total Marks in Matric" required>
+              <label for="1st year (Out of 505)">Enter Your Marks FSC</label>
+              <input type="number" class="form-control" placeholder="Obtained Marks in FSC Part-I" required>
+              <input type="number" class="form-control" placeholder="Obtained Marks in FSC Part-II" required>
+              <label for="Entrance">Expected Entrance Test Marks (out of 800)</label>
+              <input type="number" class="form-control" placeholder="Expected Marks"required>
+              <input type="submit" class="button expand alert" value="CALCULATE">
+          </center>
+      </form>
+
+
+<button class="btn open-button" onclick="openForm6()">GIKI Merit Calculator</button">
+     <div class="form-popup" id="myForm6" style=" top: -372px !important; ">
+    <form action="/action_page.php" class="form">
+        <h2>GIKI Merit Calculator</h2><hr>
+        <center>
+              <label for="1st year (Out of 505)">Enter Your Marks in Matric</label>
+              <input type="number" class="form-control" placeholder="Obtained Marks in Matric" required>
+              <input type="number" class="form-control" placeholder="Total Marks in Matric" required>
+              <label for="1st year (Out of 505)">Enter Your Marks FSC Part-I</label>
+              <input type="number" class="form-control" placeholder="Obtained Marks in FSC Part-I" required>
+              <input type="number" class="form-control" placeholder="Total Marks in FSC Part-I" required>
+              <label for="Entrance">NTS Marks (out of 100)</label>
+              <input type="number" class="form-control" placeholder="NTS Marks"required>
+              <input type="submit" class="button expand alert" value="CALCULATE">
+          </center>
+      </form>
+
+
+<button class="btn open-button" onclick="openForm7()">General Merit Calculator</button">
+ <div class="form-popup" id="myForm7" style=" top: -446px !important; ">
+    <form action="/action_page.php" class="form">
+        <h2>General Merit Calculator</h2><hr>
+        <center>
+              <label for="1st year (Out of 505)">Enter Your Marks in Matric</label>
+              <input type="number" class="form-control" placeholder="Obtained Marks in Matric" required>
+              <input type="number" class="form-control" placeholder="Total Marks in Matric" required>
+              <label for="1st year (Out of 505)">Enter Your Marks FSC</label>
+              <input type="number" class="form-control" placeholder="Obtained Marks in FSC" required>
+              <input type="number" class="form-control" placeholder="Total Marks in FSC" required>
+              <label for="Entrance">Expected Entrance Test Marks (out of 1100)</label>
+              <input type="submit" class="button expand alert" value="CALCULATE">
+          </center>
+      </form>
+
+</div>
+</div>
+
+<!---buttons end--->
+</div>
+
+</body>
+
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<body>
+<footer class="nb-footer">
+<div class="container">
+<div class="row">
+<div class="col-sm-12">
+<div class="about">
+ 
+  
+
+  <div class="social-media">
+    <ul class="list-inline">
+      <li><a href="http://www.nextbootstrap.com/" title=""><i class="fa fa-facebook"></i></a></li>
+      <li><a href="http://www.nextbootstrap.com/" title=""><i class="fa fa-twitter"></i></a></li>
+      <li><a href="http://www.nextbootstrap.com/" title=""><i class="fa fa-google-plus"></i></a></li>
+      <li><a href="http://www.nextbootstrap.com/" title=""><i class="fa fa-linkedin"></i></a></li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<div class="col-md-3 col-sm-6">
+<div class="footer-info-single">
+  <h2 class="title">About</h2>
+  <ul class="list-unstyled">
+ <p>Field Finder is Pakistan's Largest  Educational Guidance providing Organization established in 2021. Field Finder is a pioneer non-profit organization in the field of education.</p>
+  </ul>
+</div>
+</div>
+<div class="col-md-2 col-sm-6"></div>
+
+<div class="col-md-4 col-sm-6">
+<div class="footer-info-single">
+  <h2 class="title">Quick Links</h2>
+  <ul class="list-unstyled">
+    <li><a href="http://www.nextbootstrap.com/" title=""><i class="fa fa-angle-double-right"></i> About Us</a></li>
+    <li><a href="http://www.nextbootstrap.com/" title=""><i class="fa fa-angle-double-right"></i> Contact Us</a></li>
+    
+  </ul>
+</div>
+</div>
+
+<div class="col-md-3 col-sm-6">
+<div class="footer-info-single">
+  <h2 class="title">Security & privacy</h2>
+  <ul class="list-unstyled">
+    <p>Our privacy policy contains details about our information practices, including what type of information is gathered, how it is used, to whom we disclose, and how we safeguard it.</p>
+  </ul>
+</div>
+</div>
+
+
+</div>
+</div>
+
+<section class="copyright">
+<div class="container">
+<div class="row">
+<div class="col-sm-6">
+<p>Copyright © 2021. Field Finder.</p>
+</div>
+</div>
+</div>
+</section>
+
+</footer>
+
+
+
+
+</body>
+
+<script>
+
+//Uet merit
+var m_o, m_t, i_o, i_t, e_o, agg; 
+function myFunction1() 
+{  
+ m_o=document.getElementById("m_o").value;
+ m_t=document.getElementById("m_t").value;
+ i_o=document.getElementById("i_o").value;
+ i_t=document.getElementById("i_t").value;
+ e_o=document.getElementById("e_o").value; 
+ agg=((45*i_o)/i_t)+((30*e_o)/400)+((25*m_o)/m_t); 
+ document.getElementById("agg").value = agg; return false;
+ }  
+
+ //Medical merit
+var m_1, m_2, i_1, i_2, e_1, agg1; 
+function myFunction2() 
+{  
+ m_1=document.getElementById("m_1").value;
+ m_2=document.getElementById("m_2").value;
+ i_1=document.getElementById("i_1").value;
+ i_2=document.getElementById("i_2").value;
+ e_1=document.getElementById("e_1").value; 
+ agg1=((40*i_1)/i_2)+((50*e_1)/200)+((10*m_1)/m_2); 
+ document.getElementById("agg1").value = agg1; return false;
+ }  
+
+ //Nust merit
+var m_3, m_4, i_o, i_t, e_2, agg2; 
+function myFunction3() 
+{  
+ m_3=document.getElementById("m_3").value;
+ m_4=document.getElementById("m_4").value;
+ i_3=document.getElementById("i_3").value;
+ i_4=document.getElementById("i_4").value;
+ e_2=document.getElementById("e_2").value; 
+ agg2=((15*i_3)/i_4)+((75*e_2)/200)+((10*m_3)/m_4); 
+ document.getElementById("agg2").value = agg2; return false;
+ }  
+
+//COMSATS merit
+var m_5, m_6, i_5, i_6, e_3, agg3; 
+function myFunction4() 
+{  
+ m_5=document.getElementById("m_5").value;
+ m_6=document.getElementById("m_6").value;
+ i_5=document.getElementById("i_5").value;
+ i_6=document.getElementById("i_6").value;
+ e_3=document.getElementById("e_3").value; 
+ agg3=((40*i_5)/i_6)+((50*e_3)/100)+((10*m_5)/m_6); 
+ document.getElementById("agg3").value = agg3; return false;
+ }  
+
+function openForm1()  {
+document.getElementById("myForm1").style.display = "block" ;
+document.getElementById("myForm2").style.display = "none" ;
+document.getElementById("myForm3").style.display = "none" ;
+document.getElementById("myForm4").style.display = "none" ;
+document.getElementById("myForm5").style.display = "none" ;
+document.getElementById("myForm6").style.display = "none" ;
+document.getElementById("myForm7").style.display = "none" ;
+}function openForm2() {
+document.getElementById("myForm2").style.display = "block";
+document.getElementById("myForm1").style.display = "none" ;
+document.getElementById("myForm3").style.display = "none" ;
+document.getElementById("myForm4").style.display = "none" ;
+document.getElementById("myForm5").style.display = "none" ;
+document.getElementById("myForm6").style.display = "none" ;
+document.getElementById("myForm7").style.display = "none" ;
+}function openForm3() {
+document.getElementById("myForm3").style.display = "block";
+document.getElementById("myForm2").style.display = "none" ;
+document.getElementById("myForm1").style.display = "none" ;
+document.getElementById("myForm4").style.display = "none" ;
+document.getElementById("myForm5").style.display = "none" ;
+document.getElementById("myForm6").style.display = "none" ;
+document.getElementById("myForm7").style.display = "none" ;
+}function openForm4() {
+document.getElementById("myForm4").style.display = "block";
+document.getElementById("myForm2").style.display = "none" ;
+document.getElementById("myForm3").style.display = "none" ;
+document.getElementById("myForm1").style.display = "none" ;
+document.getElementById("myForm5").style.display = "none" ;
+document.getElementById("myForm6").style.display = "none" ;
+document.getElementById("myForm7").style.display = "none" ;
+}function openForm5() {
+document.getElementById("myForm5").style.display = "block";
+document.getElementById("myForm2").style.display = "none" ;
+document.getElementById("myForm3").style.display = "none" ;
+document.getElementById("myForm4").style.display = "none" ;
+document.getElementById("myForm1").style.display = "none" ;
+document.getElementById("myForm6").style.display = "none" ;
+document.getElementById("myForm7").style.display = "none" ;
+}function openForm6() {
+document.getElementById("myForm6").style.display = "block";
+document.getElementById("myForm2").style.display = "none" ;
+document.getElementById("myForm3").style.display = "none" ;
+document.getElementById("myForm4").style.display = "none" ;
+document.getElementById("myForm5").style.display = "none" ;
+document.getElementById("myForm1").style.display = "none" ;
+document.getElementById("myForm7").style.display = "none" ;
+}function openForm7() {
+document.getElementById("myForm7").style.display = "block";
+document.getElementById("myForm2").style.display = "none" ;
+document.getElementById("myForm3").style.display = "none" ;
+document.getElementById("myForm4").style.display = "none" ;
+document.getElementById("myForm5").style.display = "none" ;
+document.getElementById("myForm6").style.display = "none" ;
+document.getElementById("myForm1").style.display = "none" ;
+}
+</script>
+
+</body>
+</html>
