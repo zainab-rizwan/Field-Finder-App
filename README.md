@@ -1,11 +1,9 @@
-<h1 align="center">Field Finder App</h1>
+Field Finder App
 
- 
- ## Table Of Contents
+## Table Of Contents
 
 - [Project Description](#project-description)
 - [Features](#features)
-- [UI](#ui)
 - [Built With](#built-with)
 - [Contributers](#contributers)
 
@@ -19,10 +17,6 @@ Field Finder is a web application that lets you search for different majors and 
 - Database of over 1500 institutions of Pakistan along with their locations
 - Merit calculators of all universities of Pakistan
 - An interest-based quiz which narrows down which degree programs might be a good fit for you
-
-## UI
-
-
 
 ## Built With
 - HTML
